@@ -36,8 +36,8 @@ public class EC2Create
     static {
         // Your accesskey and secretkey
         AWS_CREDENTIALS = new BasicAWSCredentials(
-                "AKIAIG2GH6N2SE2W5TIA",
-                "7OZh705JnZi7B7Og/wN+gzNIeJYC8DwDEFMl9pck"
+                "",
+                ""
         );
     }
     public static String createEC2() {
@@ -53,7 +53,7 @@ public class EC2Create
                 .withMinCount(1)
                 .withMaxCount(1)
                 .withKeyName("test2")
-                .withSecurityGroupIds("sg-bf7ad1b2");
+                .withSecurityGroupIds("");
  
         RunInstancesResult runInstancesResult = ec2Client.runInstances(runInstancesRequest);
  
