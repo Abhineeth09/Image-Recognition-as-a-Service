@@ -10,7 +10,7 @@ import apptier.S3Output;
 
 
 // Add the the queue name and url in some constant file. 
-public class RunDeepLearningModel { /* implements Runnable { 
+public class RunDeepLearningModel implements Runnable { 
 	
 	public void run(){
 		// Add the Calling Function here 
@@ -56,7 +56,7 @@ public class RunDeepLearningModel { /* implements Runnable {
 			} 
 		
 		}
-	}*/
+	}
 	public static String deepLearningModel(String imageName)
 	{
 		String s = null;
@@ -108,10 +108,10 @@ public class RunDeepLearningModel { /* implements Runnable {
 	
 	public static void main (String [] args) 
 	{
-		Ec2Instance.terminateInstance();
-		//RunDeepLearningModel dp = new RunDeepLearningModel();
-		//Thread t1 = new Thread(dp);
-		//t1.start();
+		//Ec2Instance.terminateInstance();
+		RunDeepLearningModel dp = new RunDeepLearningModel();
+		Thread t1 = new Thread(dp);
+		t1.start();
 		
 		
 		
