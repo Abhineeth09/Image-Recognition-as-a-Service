@@ -2,13 +2,13 @@
 
 _Justin Colyar, Abhineeth Mishra, Ayushi Shekhar_
 
-# **1.**** Problem statement**
+# **1. Problem statement**
 
 The project aims to build an Elastic Web Application that provides Image Recognition as a Service by returning labels to user images. The Front-End of the application accepts images from a user and returns responses that describe the image. The Back End of the application is used to run the deep learning model that outputs the prediction for every input image. The application is built by using AWS IaaS tools such as EC2, S3 and SQS; which provide the necessary infrastructure to build and scale the application.
 
-# **2.**** Design and implementation**
+# **2. Design and implementation**
 
-## **2.1**** Architecture**
+## **2.1 Architecture**
 
 Provide an architecture diagram including all the major components, and explain the design and implementation of each component in detail.
 
@@ -24,13 +24,13 @@ The SQS response and request queues are meant to decouple the web and the app ti
 
 The S3 input bucket serves as a way of storing the client&#39;s input and make sure it persists. The app tier accesses and creates personal copies of the S3 image objects for processes, again ensuring that the original image remains unchanged and stored. Moreover, the S3 response bucket also serves as a means for storing and persisting the output as a named pair for the image and the prediction result.
 
-## **2.2**** Autoscaling**
+## **2.2 Autoscaling**
 
 The Architecture of the application decouples the Web Tier and the App Tier which allows for scaling just the App Tier as the load of user requests increases. We only scale the App Tier since only the computation required at the App Tier is computationally expensive.Two SQS queues connect the Web Tier and the App Tier - The Request Queue and the Response Queue.
 
 Each request in the request queue consists of an image name that is input by the user. The size of this queue is used to determine the number of instances that need to be created. For every 10 messages in the queue, we have one App Instance that should be processing the SQS messages. The number 10 was determined by testing the speed of responses by trial and error. Automatic scaling of the App instances ensures consistent performance even though the number of requests keeps increasing. In our testing, 20 images took about 2.5 minutes to run and 100 images took about 3 minutes.
 
-# **3.**** Testing and evaluation**
+# **3. Testing and evaluation**
 
 Explain in detail how you tested and evaluated your application.
 
@@ -46,7 +46,7 @@ The Back-End (App Tier) was manually tested for the following conditions -
 
 [Evaluation]
 
-# **4.**** Code**
+# **4. Code**
 
 Explain in detail the functionality of every program included in the submission zip file.
 
