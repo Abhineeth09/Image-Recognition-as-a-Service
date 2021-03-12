@@ -2,6 +2,28 @@
 
 _Justin Colyar, Abhineeth Mishra, Ayushi Shekhar_
 
+# **0. Resources**
+
+Input bucket name: cloud-computing-project-input-bucket
+Input bucket resource link: arn:aws:s3:::cloud-computing-project-input-bucket
+
+Output bucket name: cloudresponsebucket
+Output bucket resource link: arn:aws:s3:::cloudresponsebucket
+
+Website IP: http://52.200.244.34/
+
+## **0.1 TA Access**
+
+Sign in console: https://414376683109.signin.aws.amazon.com/console
+
+User: TA
+
+Access Key ID: AKIAWA6WGMZSU3LMVTXQ
+
+Secret Access Key: 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
+
+Temp password: q2z@IF7=WV}|jE]
+
 # **1. Problem statement**
 
 The project aims to build an Elastic Web Application that provides Image Recognition as a Service by returning labels to user images. The Front-End of the application accepts images from a user and returns responses that describe the image. The Back End of the application is used to run the deep learning model that outputs the prediction for every input image. The application is built by using AWS IaaS tools such as EC2, S3 and SQS; which provide the necessary infrastructure to build and scale the application. The auto-scaling aspect of the application is to be implemented by only using the mentioned IaaS tools.
