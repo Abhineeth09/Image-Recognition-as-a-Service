@@ -10,7 +10,7 @@ The project aims to build an Elastic Web Application that provides Image Recogni
 
 ## **2.1 Architecture**
 
-![alt text](https://ibb.co/4KDcCww)
+![alt text](https://github.com/Abhineeth09/Image-Recognition-as-a-Service/blob/main/architecture.png)
 
 
 [Overall Design]
