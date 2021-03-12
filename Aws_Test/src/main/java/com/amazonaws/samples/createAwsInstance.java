@@ -57,14 +57,14 @@ public class createAwsInstance
     //}
 */
 
-public class createAwsInstance   implements Runnable { 
+public class createAwsInstance  implements Runnable { 
 	
 	public void run(){
 		// Add the Calling Function here 
-		System.out.println("Starting the Process\n");
+		System.out.println("Starting the  Web Tier Process\n");
 		startMain();
+	
 	}
-
 	public void startMain()
 	{
 		while (true)
@@ -76,7 +76,7 @@ public class createAwsInstance   implements Runnable {
 	
 	static void StartEc2Instance(String imageId, String instanceName)
     {
-    	// Idealyy Image Id should be the App Tier AMi Id . 
+    	// Ideally Image Id should be the App Tier AMi Id . 
        // AmazonEC2 ec2Client = AmazonEC2ClientBuilder.standard()
          //       .withCredentials(new AWSStaticCredentialsProvider(ConfigureAws.AWS_CREDENTIALS))
            //     .withRegion(Global.REGION)
@@ -86,7 +86,7 @@ public class createAwsInstance   implements Runnable {
 
         // Launch EC2 Instance -- standard linux -- ami-00ddb0e5626798373 Mostly for web tier
         // App Tier = ami-0ee8cf7b8a34448a6
-        RunInstancesRequest runInstancesRequest = new RunInstancesRequest().withImageId(Global.IMAGEID)
+        RunInstancesRequest runInstancesRequest = new RunInstancesRequest().withImageId(imageId)
                 .withInstanceType("t2.micro") // This just tells  how many vCpus would be used .
                 .withMinCount(1)
                 .withMaxCount(1)
@@ -112,12 +112,13 @@ public class createAwsInstance   implements Runnable {
 	
 		public static void main(String[] args) {
 			//StartEc2Instance("ami-0ee8cf7b8a34448a6", "App_Tier_Template");
-			//StartEc2Instance("ami-0915bcb5fa77e4892", "Web-Tier");
-			// The Next APi woud go in the Web server Stuff 
+			//StartEc2Instance("ami-00ddb0e5626798373", "Web-Tier");
+			// The Next APi would go in the Web server Stuff 
 			//S3Implemntation.getImageFromS3();
 			createAwsInstance as = new createAwsInstance();
 			Thread t1 = new Thread(as);
 			t1.start();
+			
 			
 		}
 	}

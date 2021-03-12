@@ -21,7 +21,7 @@ public class SqsReadMessage {
 	    	//String standardQueueUrl = sqs.getQueueUrl(QueueName).getQueueUrl();
 	    	String standardQueueUrl = "https://sqs.us-east-1.amazonaws.com/414376683109/TestQ";
 	    	ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(standardQueueUrl)
-	    			  .withWaitTimeSeconds(10)
+	    			  .withWaitTimeSeconds(waitTime)
 	    			  .withVisibilityTimeout(visibilityTimeout)
 	    			  .withMaxNumberOfMessages(1);
 	    			ReceiveMessageResult result = null; 
@@ -38,9 +38,11 @@ public class SqsReadMessage {
 	    				{
 	    					System.out.println("This is the Message which is being deleted *  " + msg.getReceiptHandle());
 	    					System.out.println("After the crash ");
-	    					sqs.deleteMessage(standardQueueUrl, msg.getReceiptHandle());
-	    					//sqs.deleteMessage(standardQueueUrl,result.getMessages().get(0).getReceiptHandle());
+	    					
+	    					//sqs.deleteMessage(standardQueueUrl,result.getMessages().get(0).getReceiptHandle())
 	    					test = sqsMessages.get(0).getBody();
+	    					System.out.println("The Message is " + test );
+	    					sqs.deleteMessage(standardQueueUrl, msg.getReceiptHandle());
 	    				}
 	    			}
 					
@@ -67,10 +69,6 @@ public class SqsReadMessage {
 		GetQueueAttributesRequest getQueueAttributesRequest = new GetQueueAttributesRequest(requestQueueUrl).withAttributeNames("All");
     	GetQueueAttributesResult getQueueAttributesResult = sqs.getQueueAttributes(getQueueAttributesRequest);
     	int queueSize = Integer.parseInt(getQueueAttributesResult.getAttributes().get("ApproximateNumberOfMessages"));
-    	/*
-    	System.out.println(String.format("The number of messages on the queue: %s", queueSize));
-    	System.out.println(String.format("The number of messages in flight: %s", getQueueAttributesResult.getAttributes().get("ApproximateNumberOfMessagesNotVisible")));
-    	*/
     	return queueSize;
 	}
 

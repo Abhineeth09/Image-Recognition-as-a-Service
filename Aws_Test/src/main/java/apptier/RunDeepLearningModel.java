@@ -10,7 +10,7 @@ import apptier.S3Output;
 
 
 // Add the the queue name and url in some constant file. 
-public class RunDeepLearningModel  implements Runnable { 
+public class RunDeepLearningModel { /* implements Runnable { 
 	
 	public void run(){
 		// Add the Calling Function here 
@@ -24,17 +24,15 @@ public class RunDeepLearningModel  implements Runnable {
 		{
 			
 			int queueSize = SqsReadMessage.checkQueueSize("https://sqs.us-east-1.amazonaws.com/414376683109/TestQ");
-			//stem.out.println("The Queue Size is : * " + queueSize); 
 			if( queueSize == 0 ) 
 			{
-				//stem.out.println("Inside the if Condition ");
-				//Instance.terminateInstance();
+				Ec2Instance.terminateInstance();
 				
 			}
 			else
 			{
-				System.out.println("In the else part of the sqs size check ");
-				String sqsMessage = SqsReadMessage.readFromQueue("TestQ", 0 , 15);
+				
+				String sqsMessage = SqsReadMessage.readFromQueue("TestQ", 15 , 30 ) ; 
 				if(sqsMessage == null ) 
 				{
 					continue; 
@@ -44,7 +42,6 @@ public class RunDeepLearningModel  implements Runnable {
 					
 				
 				// Check for the queue size , if sizes 0 , then terminate the ec2 instance . 
-					System.out.println("Before the DeepLearningModel");
 					String predictedValue = deepLearningModel(sqsMessage);
 					if(predictedValue == null) 
 					{
@@ -55,12 +52,11 @@ public class RunDeepLearningModel  implements Runnable {
 					String output = sqsMessage+ "  " + predictedValue;
 					System.out.println("The output including image name and output " + output);
 					S3Output.addResponseToOutputS3(sqsMessage, output );
-				//sReadMessage.postMessageToQueue(output, "ResponseQ");
 				}
 			} 
 		
 		}
-	}
+	}*/
 	public static String deepLearningModel(String imageName)
 	{
 		String s = null;
@@ -68,10 +64,7 @@ public class RunDeepLearningModel  implements Runnable {
 		imageName = imageName.replaceAll("\\s+","");
 		S3Output.downloadObjectFromS3(imageName , "cloud-computing-project-input-bucket");
         try {
-            
-	    // run the Unix "ps -ef" command
-            // using the Runtime exec method:
-        	
+    
             Process p = Runtime.getRuntime().exec("python3 /home/ubuntu/classifier/image_classification.py  /home/ubuntu/classifier/" +imageName );
             
             BufferedReader stdInput = new BufferedReader(new 
@@ -115,40 +108,13 @@ public class RunDeepLearningModel  implements Runnable {
 	
 	public static void main (String [] args) 
 	{
-		RunDeepLearningModel dp = new RunDeepLearningModel();
-		Thread t1 = new Thread(dp);
-		t1.start();
+		Ec2Instance.terminateInstance();
+		//RunDeepLearningModel dp = new RunDeepLearningModel();
+		//Thread t1 = new Thread(dp);
+		//t1.start();
 		
 		
-		/*
-		while(true) 
-		{
-			
-			int queueSize = SqsReadMessage.checkQueueSize("https://sqs.us-east-1.amazonaws.com/414376683109/TestQ");
-			if( queueSize == 0 ) 
-			{
-				Ec2Instance.terminateInstance();
-				break;
-			}
-			else
-			{
-				Message sqsMessage = SqsReadMessage.readFromQueue("TestQ");
-				// Check for the queue size , if sizes 0 , then terminate the ec2 instance . 
-				System.out.println("Before the DeepLearningModel");
-				String predictedValue = deepLearningModel(sqsMessage.getBody());
-				System.out.println("The Predicted value is " + predictedValue);
-				// Add this predicted value to output queue and to S3
-				String output = sqsMessage.getBody()+ "  " + predictedValue;
-				System.out.println("The output including image name and output " + output);
-				S3Output.addResponseToOutputS3(sqsMessage.getBody(), output );
-				SqsReadMessage.postMessageToQueue(output, "ResponseQ");
-			}
-		// Add the above to s3 also 
 		
-		}
-		//S3Output.downloadObjectFromS3("0_cat.png", "cloud-computing-project-input-bucket");
-		
-		*/
 		
 	}
 

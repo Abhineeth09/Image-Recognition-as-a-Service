@@ -19,7 +19,8 @@ public class Global {
 
 		//public static final String IMAGEID = "ami-00ddb0e5626798373";
 		//public static final String IMAGEID = "ami-0ee8cf7b8a34448a6";
-		public static final String IMAGEID = "ami-0d9461d0d86573303";
+		//public static final String IMAGEID = "ami-0d9461d0d86573303";
+		public static final String IMAGEID = "ami-093b655b6b1ccdfeb";
 		
 		
 		
