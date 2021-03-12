@@ -10,9 +10,8 @@ The project aims to build an Elastic Web Application that provides Image Recogni
 
 ## **2.1 Architecture**
 
-Provide an architecture diagram including all the major components, and explain the design and implementation of each component in detail.
+![alt text](https://github.com/Abhineeth09/Image-Recognition-as-a-Service/tree/main/architecture.png)
 
-![](RackMultipart20210312-4-132um6j_html_4c7b97d64ce9fcfc.png)
 
 [Overall Design]
 
